@@ -29,10 +29,10 @@ pipeline{
         stage("Deploy"){
             steps{
                 echo "Deploying the Code"
-                sh "scp -i 'jen_kp.pem' /var/lib/jenkins/workspace/new-app-18/docker-compose.yml ubuntu@ec2-54-225-49-253.compute-1.amazonaws.com:"
-                sh "scp -i 'jen_kp.pem' /var/lib/jenkins/workspace/new-app-18/mynotes/build/index.html ubuntu@ec2-54-225-49-253.compute-1.amazonaws.com:"
+                sh "scp -i 'jen_kp.pem' /var/lib/jenkins/workspace/new-app-18/docker-compose.yml ubuntu@ec2-54-85-158-197.compute-1.amazonaws.com:"
+                sh "scp -i 'jen_kp.pem' /var/lib/jenkins/workspace/new-app-18/mynotes/build/index.html ubuntu@ec2-54-85-158-197.compute-1.amazonaws.com:"
                 sshagent(credentials: ['aws_ec2']){
-                    sh("ssh ubuntu@ec2-54-225-49-253.compute-1.amazonaws.com 'docker-compose stop && docker-compose rm -f && docker-compose pull && docker-compose up -d'")
+                    sh("ssh ubuntu@ec2-54-85-158-197.compute-1.amazonaws.com 'docker-compose stop && docker-compose pull && docker-compose up -d'")
                     //sh "docker run -d -p 8000:8000 sanjitscorps/notes-app:v1"
                 }
                 
